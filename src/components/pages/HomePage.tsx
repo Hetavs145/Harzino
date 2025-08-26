@@ -5,6 +5,7 @@ import { BlogCard } from "../BlogCard";
 import { getFeaturedBlogs, BlogPost } from "../BlogData";
 import { Button } from "../ui/button";
 import { Footer } from "../Footer";
+import { BannerCarousel } from "../BannerCarousel";
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -20,6 +21,38 @@ export function HomePage({
   >([]);
   const [showFeatured, setShowFeatured] = useState(false);
   const [breakAnimation, setBreakAnimation] = useState(false);
+
+  // Banner carousel images for e-commerce website
+  const bannerImages = [
+    {
+      id: '1',
+      src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop',
+      alt: 'Summer Sale Banner',
+      title: 'Summer Sale',
+      description: 'Up to 70% off on all summer collection items. Limited time offer!'
+    },
+    {
+      id: '2',
+      src: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop',
+      alt: 'New Arrivals',
+      title: 'New Arrivals',
+      description: 'Discover the latest trends and newest products in our collection'
+    },
+    {
+      id: '3',
+      src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop',
+      alt: 'Free Shipping',
+      title: 'Free Shipping',
+      description: 'Free shipping on orders over $50. Shop now and save!'
+    },
+    {
+      id: '4',
+      src: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop',
+      alt: 'Customer Rewards',
+      title: 'Customer Rewards',
+      description: 'Join our loyalty program and earn points on every purchase'
+    }
+  ];
 
   useEffect(() => {
     setFeaturedBlogs(getFeaturedBlogs());
@@ -73,9 +106,22 @@ export function HomePage({
 
   return (
     <div className="min-h-screen bg-[#050505] text-white overflow-hidden">
-      {/* Main Hero Viewport */}
+      {/* Banner Carousel Section */}
+      <section className="relative w-full">
+        <BannerCarousel
+          images={bannerImages}
+          autoPlayInterval={5000}
+          showArrows={true}
+          showDots={true}
+          showTitle={true}
+          showDescription={true}
+          className="h-64 md:h-80 lg:h-96"
+        />
+      </section>
+
+      {/* Hero Content Section */}
       <motion.section
-        className="relative h-screen flex items-center justify-center"
+        className="relative py-16 md:py-24 flex items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -180,7 +226,7 @@ export function HomePage({
           >
             <Button
               onClick={() => onNavigate("blogs")}
-              className="bg-[#dc0073] hover:bg-[#b8005f] text-white px-8 py-3 text-lg rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-[#dc0073]/25"
+              className="bg-[#dc0073] hover:bg-[#dc0073] text-white px-8 py-3 text-lg rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-[#dc0073]/25"
             >
               Explore Our Work
             </Button>
