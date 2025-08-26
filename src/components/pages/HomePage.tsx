@@ -6,6 +6,7 @@ import { getFeaturedBlogs, BlogPost } from "../BlogData";
 import { Button } from "../ui/button";
 import { Footer } from "../Footer";
 import { BannerCarousel } from "../BannerCarousel";
+import { ProductCard } from "../ProductCard";
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -51,6 +52,119 @@ export function HomePage({
       alt: 'Customer Rewards',
       title: 'Customer Rewards',
       description: 'Join our loyalty program and earn points on every purchase'
+    }
+  ];
+
+  // Featured products with multiple images for carousel
+  const featuredProducts = [
+    {
+      id: '1',
+      name: 'Premium Wireless Headphones',
+      price: 2499,
+      originalPrice: 3999,
+      discount: 38,
+      rating: 4.5,
+      reviewCount: 128,
+      isNew: true,
+      isFeatured: true,
+      images: [
+        {
+          id: '1-1',
+          src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+          alt: 'Wireless Headphones Front View'
+        },
+        {
+          id: '1-2',
+          src: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop',
+          alt: 'Wireless Headphones Side View'
+        },
+        {
+          id: '1-3',
+          src: 'https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=400&h=400&fit=crop',
+          alt: 'Wireless Headphones Detail'
+        }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Smart Fitness Watch',
+      price: 1899,
+      originalPrice: 2499,
+      discount: 24,
+      rating: 4.3,
+      reviewCount: 89,
+      isFeatured: true,
+      images: [
+        {
+          id: '2-1',
+          src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
+          alt: 'Smart Watch Front View'
+        },
+        {
+          id: '2-2',
+          src: 'https://images.unsplash.com/photo-1544117519-31a4b719223d?w=400&h=400&fit=crop',
+          alt: 'Smart Watch Side View'
+        },
+        {
+          id: '2-3',
+          src: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
+          alt: 'Smart Watch Detail'
+        }
+      ]
+    },
+    {
+      id: '3',
+      name: 'Portable Bluetooth Speaker',
+      price: 1299,
+      originalPrice: 1799,
+      discount: 28,
+      rating: 4.7,
+      reviewCount: 156,
+      isNew: true,
+      images: [
+        {
+          id: '3-1',
+          src: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop',
+          alt: 'Bluetooth Speaker Front View'
+        },
+        {
+          id: '3-2',
+          src: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=400&fit=crop',
+          alt: 'Bluetooth Speaker Side View'
+        },
+        {
+          id: '3-3',
+          src: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=400&fit=crop',
+          alt: 'Bluetooth Speaker Detail'
+        }
+      ]
+    },
+    {
+      id: '4',
+      name: 'Ultra HD Action Camera',
+      price: 3499,
+      originalPrice: 4999,
+      discount: 30,
+      rating: 4.6,
+      reviewCount: 203,
+      isFeatured: true,
+      images: [
+        {
+          id: '4-1',
+          src: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop',
+          alt: 'Action Camera Front View'
+        },
+        {
+          id: '4-2',
+          src: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop',
+          alt: 'Action Camera Side View'
+        },
+        {
+          id: '4-3',
+          src: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop',
+          alt: 'Action Camera Detail'
+        }
+      ]
     }
   ];
 
@@ -262,6 +376,55 @@ export function HomePage({
           </div>
         </motion.div>
       </motion.section>
+
+      {/* Featured Products Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Featured Products
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our handpicked selection of premium products with multiple image views
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            {featuredProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 * index }}
+              >
+                <ProductCard
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  originalPrice={product.originalPrice}
+                  images={product.images}
+                  rating={product.rating}
+                  reviewCount={product.reviewCount}
+                  discount={product.discount}
+                  isNew={product.isNew}
+                  isFeatured={product.isFeatured}
+                  onClick={() => console.log(`Clicked product: ${product.name}`)}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* Breakthrough Animation Overlay */}
       {breakAnimation && (
